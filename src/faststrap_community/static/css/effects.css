@@ -1,0 +1,51 @@
+/* ParallaxSection Styles */
+.fs-comm-parallax-section {
+    position: relative;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Fallback for mobile devices where background-attachment: fixed is buggy */
+@media (max-width: 768px) {
+    .fs-comm-parallax-section {
+        background-attachment: scroll;
+    }
+}
+
+/* ScrollReveal Styles */
+.fs-comm-reveal {
+    opacity: 0;
+    transition: all var(--fs-comm-reveal-duration, 0.6s) ease-out;
+    transition-delay: var(--fs-comm-reveal-delay, 0s);
+}
+
+.fs-comm-reveal.up {
+    transform: translateY(30px);
+}
+
+.fs-comm-reveal.down {
+    transform: translateY(-30px);
+}
+
+.fs-comm-reveal.left {
+    transform: translateX(30px);
+}
+
+.fs-comm-reveal.right {
+    transform: translateX(-30px);
+}
+
+.fs-comm-reveal.zoom {
+    transform: scale(0.9);
+}
+
+.fs-comm-reveal.revealed {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+}

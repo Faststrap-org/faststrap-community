@@ -1,0 +1,82 @@
+name: Deploy Documentation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - 'CONTRIBUTING.md'
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Create index.html redirect
+        run: |
+          mkdir -p _site
+          cat > _site/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <title>Redirecting to Documentation</title>
+            <meta http-equiv="refresh" content="0; URL=docs/">
+            <link rel="canonical" href="docs/">
+          </head>
+          <body>
+            <p>Redirecting to <a href="docs/">documentation</a>...</p>
+          </body>
+          </html>
+          EOF
+
+      - name: Copy documentation
+        run: |
+          cp -r docs _site/docs
+          cp README.md _site/docs/
+          cp CHANGELOG.md _site/docs/
+          cp CONTRIBUTING.md _site/docs/
+
+      - name: Create Jekyll config
+        run: |
+          cat > _site/docs/_config.yml << 'EOF'
+          title: Faststrap Community
+          description: Premium components for Faststrap and FastHTML
+          theme: jekyll-theme-cayman
+          markdown: kramdown
+          kramdown:
+            input: GFM
+            syntax_highlighter: rouge
+          EOF
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: '_site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3

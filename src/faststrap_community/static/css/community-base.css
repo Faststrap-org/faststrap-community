@@ -1,0 +1,24 @@
+/* 
+   Faststrap Community - Base Stylings
+   Uses Core CSS Variables for automatic theme inheritance.
+*/
+
+:root {
+    --fs-comm-transition-slow: 0.6s;
+    --fs-comm-transition-med: 0.3s;
+    --fs-comm-transition-fast: 0.15s;
+    --fs-comm-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --fs-comm-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --fs-comm-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure components inherit fonts from Faststrap core */
+.fs-community-comp {
+    font-family: inherit;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Common utility for 3D transforms */
+.fs-perspective {
+    perspective: 1000px;
+}

@@ -1,0 +1,216 @@
+/* MorphingNavbar Styles */
+.fs-comm-morph-toggler {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.fs-comm-morph-toggler span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--bs-primary);
+    transition: all 0.3s ease;
+}
+
+/* Morphing animation states (controlled by aria-expanded or class) */
+.navbar-toggler[aria-expanded="true"] .fs-comm-morph-span-1 {
+    transform: translateY(10px) rotate(45deg);
+}
+
+.navbar-toggler[aria-expanded="true"] .fs-comm-morph-span-2 {
+    opacity: 0;
+}
+
+.navbar-toggler[aria-expanded="true"] .fs-comm-morph-span-3 {
+    transform: translateY(-10px) rotate(-45deg);
+}
+
+/* SlideMenuNavbar Styles */
+.fs-comm-slide-menu {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    /* Hidden by default */
+    width: 280px;
+    height: 100%;
+    background-color: var(--bs-body-bg);
+    border-right: 1px solid var(--bs-border-color);
+    transition: left 0.3s ease;
+    z-index: 1050;
+    padding: 2rem 1rem;
+}
+
+.fs-comm-slide-menu.show {
+    left: 0;
+}
+
+.fs-comm-slide-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 1045;
+}
+
+.fs-comm-slide-overlay.show {
+    display: block;
+}
+
+/* MegaMenuNavbar Styles */
+.fs-comm-mega-menu {
+    position: static !important;
+    /* Ensure dropdown takes layout from parent navbar-nav */
+}
+
+.fs-comm-mega-menu .dropdown-menu {
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 100%;
+    border-radius: 0;
+    margin-top: 0;
+    padding: 2rem 0;
+    box-shadow: var(--fs-comm-shadow-lg);
+}
+
+.fs-comm-mega-menu-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* 
+ * VerticalMegaMenu Styles 
+ * Modernized from mcd-menu (Zero-JS/CSS-only)
+ */
+.fs-comm-vertical-mega {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: var(--bs-card-bg);
+    border-radius: var(--bs-border-radius);
+    width: 250px;
+    box-shadow: var(--fs-comm-shadow-sm);
+    border: 1px solid var(--bs-border-color);
+}
+
+.fs-comm-vertical-mega>li {
+    position: relative;
+}
+
+.fs-comm-vertical-mega>li>a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 12px 20px;
+    color: var(--bs-body-color);
+    border-bottom: 1px solid var(--bs-border-color);
+    transition: all 0.3s linear;
+}
+
+.fs-comm-vertical-mega>li:last-child>a {
+    border-bottom: none;
+}
+
+.fs-comm-vertical-mega>li>a:hover {
+    color: var(--bs-primary);
+    background-color: var(--bs-tertiary-bg);
+}
+
+.fs-comm-vertical-mega>li>a svg,
+.fs-comm-vertical-mega>li>a i {
+    width: 20px;
+    margin-right: 15px;
+    font-size: 1.2rem;
+    color: var(--bs-secondary);
+}
+
+.fs-comm-vertical-mega>li:hover>a svg,
+.fs-comm-vertical-mega>li:hover>a i {
+    color: var(--bs-primary);
+}
+
+.fs-comm-vertical-mega .menu-text strong {
+    display: block;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.fs-comm-vertical-mega .menu-text small {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--bs-secondary-color);
+}
+
+/* Level 1 Submenu */
+.fs-comm-vertical-mega li ul {
+    position: absolute;
+    top: 0;
+    left: 248px;
+    /* Width of parent minus borders */
+    width: 200px;
+    padding: 0;
+    margin: 0;
+    background: var(--bs-card-bg);
+    border-left: 4px solid var(--bs-primary);
+    box-shadow: var(--fs-comm-shadow-md);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s linear;
+    z-index: 1000;
+}
+
+.fs-comm-vertical-mega li:hover>ul {
+    opacity: 1;
+    visibility: visible;
+    left: 250px;
+    /* Slight moves right on hover */
+}
+
+/* Triangle indicator */
+.fs-comm-vertical-mega li ul:before {
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: -9px;
+    border-right: 5px solid var(--bs-primary);
+    border-bottom: 5px solid transparent;
+    border-top: 5px solid transparent;
+}
+
+.fs-comm-vertical-mega li ul li a {
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    color: var(--bs-body-color);
+    text-decoration: none;
+    border-bottom: 1px solid var(--bs-border-color);
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.fs-comm-vertical-mega li ul li a:hover {
+    background-color: var(--bs-tertiary-bg);
+    color: var(--bs-primary);
+    padding-left: 20px;
+}
+
+/* Level 2 Submenu */
+.fs-comm-vertical-mega li ul li ul {
+    top: 0;
+    left: 190px;
+    border-left: 4px solid var(--bs-primary);
+}
+
+.fs-comm-vertical-mega li ul li:hover>ul {
+    left: 200px;
+    top: 0;
+}

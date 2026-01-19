@@ -1,0 +1,125 @@
+/* FlipCard Styles */
+.fs-comm-flip-card {
+    background-color: transparent;
+    perspective: 1000px;
+}
+
+.fs-comm-flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform var(--fs-comm-flip-duration, 0.6s);
+    transform-style: preserve-3d;
+}
+
+.fs-comm-flip-card:hover .fs-comm-flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.fs-comm-flip-card-front,
+.fs-comm-flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fs-comm-flip-card-front {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+}
+
+.fs-comm-flip-card-back {
+    background-color: var(--bs-primary);
+    color: white;
+    transform: rotateY(180deg);
+}
+
+/* TiltCard Styles */
+.fs-comm-tilt-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.fs-comm-tilt-card:hover {
+    transform: translateY(-5px) rotateX(5deg) rotateY(2deg);
+    box-shadow: var(--fs-comm-shadow-lg);
+}
+
+/* RevealCard Styles */
+.fs-comm-reveal-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.fs-comm-reveal-overlay {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(var(--bs-primary-rgb), 0.9);
+    color: white;
+    transition: bottom 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.fs-comm-reveal-card:hover .fs-comm-reveal-overlay {
+    bottom: 0;
+}
+
+.fs-comm-reveal-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.fs-comm-reveal-card:hover .fs-comm-reveal-image {
+    transform: scale(1.1);
+}
+
+/* GlowCard Styles */
+.fs-comm-glow-card {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.fs-comm-glow-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: var(--glow-color, var(--bs-primary));
+    opacity: 0;
+    filter: blur(10px);
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.fs-comm-glow-card:hover::before {
+    opacity: 0.6;
+}
+
+.fs-comm-glow-card.glow-low:hover::before {
+    opacity: 0.3;
+    filter: blur(5px);
+}
+
+.fs-comm-glow-card.glow-high:hover::before {
+    opacity: 0.9;
+    filter: blur(15px);
+}

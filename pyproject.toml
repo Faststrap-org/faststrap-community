@@ -1,0 +1,102 @@
+[build-system]
+requires = ["hatchling>=1.8.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "faststrap-community"
+version = "0.1.0"
+description = "Community driven components for Faststrap"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    { name = "Faststrap Community", email = "community@faststrap.dev" }
+]
+keywords = [
+    "fasthtml",
+    "bootstrap",
+    "faststrap",
+    "ui-components",
+    "community",
+    "plugins"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "faststrap>=0.5.0,<0.7.0",  # Support v0.5.x and v0.6.x
+    "python-fasthtml>=0.10.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.0",
+    "black>=24.0",
+    "ruff>=0.5.0",
+]
+# Modular installation options
+# Note: All components are included in the base package
+# These extras are for documentation/clarity only
+cards = []  # FlipCard, TiltCard, RevealCard, GlowCard, ProfileCard, PricingCard, StatCard, TimelineCard
+loaders = []  # DotsLoader, RingLoader, PulseLoader, SkeletonLoader, ProgressRing, WaveLoader, TypewriterLoader, PolygonLoader
+forms = []  # AnimatedInput, SearchBar, TagInput
+buttons = []  # GradientButton, IconButton, FloatingActionButton
+navbars = []  # MorphingToggler, SlideMenuNavbar, MegaMenuNavbar, VerticalMegaMenu
+effects = []  # ParallaxSection, ScrollReveal
+pwa = []  # PWA integration utilities
+all = []  # All components (same as base install)
+
+[project.urls]
+Homepage = "https://github.com/Faststrap-org/faststrap-community"
+Repository = "https://github.com/Faststrap-org/faststrap-community"
+Issues = "https://github.com/Faststrap-org/faststrap-community/issues"
+
+# ============================================================================
+# Build Configuration
+# ============================================================================
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/faststrap_community"]
+artifacts = [
+    "static/**/*",
+]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/static",
+    "/tests",
+    "/examples",
+    "/*.md",
+    "/LICENSE",
+]
+
+# ============================================================================
+# Code Formatting & Linting (Same as Core)
+# ============================================================================
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311", "py312"]
+include = '\.pyi?$'
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP", "B", "C4"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+"**/components/**/*.py" = ["N802"]
+"tests/**/*.py" = ["S101"]
