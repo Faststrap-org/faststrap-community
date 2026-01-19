@@ -29,6 +29,9 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          # Install Faststrap from Git to ensure we have the latest version (v0.5.0+)
+          # This fixes the issue if v0.5.0 is not yet on PyPI
+          pip install "faststrap @ git+https://github.com/Faststrap-org/Faststrap.git"
           pip install -e ".[dev]"
 
       - name: Run Black (formatting check)

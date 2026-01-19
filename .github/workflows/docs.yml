@@ -62,7 +62,8 @@ jobs:
 
       - name: Create Jekyll config
         run: |
-          cat > _site/docs/_config.yml << 'EOF'
+          # Create config at root of site
+          cat > _site/_config.yml << 'EOF'
           title: Faststrap Community
           description: Premium components for Faststrap and FastHTML
           theme: jekyll-theme-cayman
